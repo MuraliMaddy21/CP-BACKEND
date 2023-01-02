@@ -134,7 +134,7 @@ var options = {
     'Authorization': 'Basic YWJhcGVyMTphYmFwQDEyMw==',
     'Cookie': 'sap-usercontext=sap-client=100'
   },
-  body: '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soap:Header/>\r\n   <soap:Body>\r\n      <urn:ZFM_DELIVERYLIST_CP_MD>\r\n         <!--Optional:-->\r\n         <IT_DELIVERY>\r\n            <!--Zero or more repetitions:-->\r\n            \r\n         </IT_DELIVERY>\r\n         <I_CUS_ID>12</I_CUS_ID>\r\n      </urn:ZFM_DELIVERYLIST_CP_MD>\r\n   </soap:Body>\r\n</soap:Envelope>'
+  body: `<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soap:Header/>\r\n   <soap:Body>\r\n      <urn:ZFM_DELIVERYLIST_CP_MD>\r\n         <!--Optional:-->\r\n         <IT_DELIVERY>\r\n            <!--Zero or more repetitions:-->\r\n            \r\n         </IT_DELIVERY>\r\n         <I_CUS_ID>${customerid}</I_CUS_ID>\r\n      </urn:ZFM_DELIVERYLIST_CP_MD>\r\n   </soap:Body>\r\n</soap:Envelope>`
 
 };
 request(options, function (error, response) {
@@ -211,7 +211,7 @@ app.get('/cppayage',function(req,res)
       'Authorization': 'Basic YWJhcGVyMTphYmFwQDEyMw==',
       'Cookie': 'sap-usercontext=sap-client=100'
     },
-    body: '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soap:Header/>\r\n   <soap:Body>\r\n      <urn:ZFM_PAYMENTAGE_CP_MD>\r\n         <IT_DET>\r\n            <!--Zero or more repetitions:-->\r\n            <item>\r\n               \r\n            </item>\r\n         </IT_DET>\r\n         <I_COM_CODE>0001</I_COM_CODE>\r\n         <I_CUS_ID>12</I_CUS_ID>\r\n         <!--Optional:-->\r\n         <I_DOC_DATE></I_DOC_DATE>\r\n      </urn:ZFM_PAYMENTAGE_CP_MD>\r\n   </soap:Body>\r\n</soap:Envelope>'
+    body: `<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soap:Header/>\r\n   <soap:Body>\r\n      <urn:ZFM_PAYMENTAGE_CP_MD>\r\n         <IT_DET>\r\n            <!--Zero or more repetitions:-->\r\n            <item>\r\n               \r\n            </item>\r\n         </IT_DET>\r\n         <I_COM_CODE>0001</I_COM_CODE>\r\n         <I_CUS_ID>${customerid}</I_CUS_ID>\r\n         <!--Optional:-->\r\n         <I_DOC_DATE></I_DOC_DATE>\r\n      </urn:ZFM_PAYMENTAGE_CP_MD>\r\n   </soap:Body>\r\n</soap:Envelope>`
   
   };
   request(options, function (error, response) {
@@ -237,7 +237,7 @@ var options = {
     'Authorization': 'Basic YWJhcGVyMTphYmFwQDEyMw==',
     'Cookie': 'sap-usercontext=sap-client=100'
   },
-  body: '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soap:Header/>\r\n   <soap:Body>\r\n      <urn:ZFM_SALESORDER_CP_MD>\r\n         <I_CUS_ID>12</I_CUS_ID>\r\n         <I_DOCDATE_FROM></I_DOCDATE_FROM>\r\n         <I_DOCDATE_TO></I_DOCDATE_TO>\r\n         <I_EXMATNR>\r\n            <MATERIAL_EXT></MATERIAL_EXT>\r\n            <MATERIAL_VERS></MATERIAL_VERS>\r\n            <MATERIAL_GUID></MATERIAL_GUID>\r\n         </I_EXMATNR>\r\n         <I_MATNR></I_MATNR>\r\n         <I_PURORDER></I_PURORDER>\r\n         <I_PURORDER_NUM></I_PURORDER_NUM>\r\n         <I_SALES_ORG>0001</I_SALES_ORG>\r\n      </urn:ZFM_SALESORDER_CP_MD>\r\n   </soap:Body>\r\n</soap:Envelope>'
+  body: `<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soap:Header/>\r\n   <soap:Body>\r\n      <urn:ZFM_SALESORDER_CP_MD>\r\n         <I_CUS_ID>${customerid}</I_CUS_ID>\r\n         <I_DOCDATE_FROM></I_DOCDATE_FROM>\r\n         <I_DOCDATE_TO></I_DOCDATE_TO>\r\n         <I_EXMATNR>\r\n            <MATERIAL_EXT></MATERIAL_EXT>\r\n            <MATERIAL_VERS></MATERIAL_VERS>\r\n            <MATERIAL_GUID></MATERIAL_GUID>\r\n         </I_EXMATNR>\r\n         <I_MATNR></I_MATNR>\r\n         <I_PURORDER></I_PURORDER>\r\n         <I_PURORDER_NUM></I_PURORDER_NUM>\r\n         <I_SALES_ORG>0001</I_SALES_ORG>\r\n      </urn:ZFM_SALESORDER_CP_MD>\r\n   </soap:Body>\r\n</soap:Envelope>`
 
 };
 request(options, function (error, response) {
