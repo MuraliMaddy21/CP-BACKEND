@@ -6,7 +6,7 @@ var cors = require("cors")
 const {response} = require('express')
 const app = express();
 const X2JS = require('x2js')
-
+const { exit } = require("process");
 app.use(cors())
 
 
@@ -250,6 +250,17 @@ request(options, function (error, response) {
 
 
 })
+
+app.get('/shutdown',function(req,res)
+{
+
+ 
+  exit();
+
+
+})
+
+
 
 
 
