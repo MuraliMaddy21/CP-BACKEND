@@ -5,8 +5,13 @@ const bodyParser = require("body-parser");
 var cors = require("cors")
 const {response} = require('express')
 const app = express();
+require('dotenv').config();
 const X2JS = require('x2js')
 const { exit } = require("process");
+const accountSid = 'ACdbc551338855ad25fedecadf7207e3b2'; 
+const authToken = process.env.AUTH; 
+const client = require('twilio')(accountSid, authToken); 
+const folderPath = "D:/payslip";
 app.use(cors())
 
 
@@ -51,6 +56,33 @@ request(options, function (error, response) {
   var x2js = new X2JS();
   result1 = x2js.xml2js(response.body)
   result1 = JSON.stringify(result1)
+  console.log(result1);
+  var status = response.body;
+  status = x2js.xml2js(status)
+  status=status['Envelope']['Body']['ZFM_LOGIN_CP_MDResponse']['E_MESSAGE']
+  console.log(status)
+  // if(status == "S")
+  // {
+  //   client.messages 
+  //     .create({ 
+  //        body: 'Login Attempt Made!Login Successful!',  
+  //        messagingServiceSid: 'MG3b1bb34d27f2176205c43dbd554b58e0',      
+  //        to: '+919150064160' 
+  //      }) 
+  //     .then(message => console.log(message.sid)) 
+  //     .done();
+  // }
+  // else{
+  //   client.messages 
+  //     .create({ 
+  //        body: 'Login Attempt Made!Login Failure!Check Credentials',  
+  //        messagingServiceSid: 'MG3b1bb34d27f2176205c43dbd554b58e0',      
+  //        to: '+919150064160' 
+  //      }) 
+  //     .then(message => console.log(message.sid)) 
+  //     .done();
+
+  // }
   res.send(result1)
 });
 
@@ -257,6 +289,20 @@ app.get('/shutdown',function(req,res)
  
   exit();
 
+
+})
+
+app.get('/pdf',function(req,res)
+{
+
+ 
+  res.download(folderPath+'/invoice.pdf', function(err) {
+    if(err) {
+        console.log(err);
+    }
+
+
+  })
 
 })
 
