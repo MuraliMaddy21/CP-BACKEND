@@ -12,6 +12,8 @@ const accountSid = 'ACdbc551338855ad25fedecadf7207e3b2';
 const authToken = process.env.AUTH; 
 const client = require('twilio')(accountSid, authToken); 
 const folderPath = "D:/payslip";
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 app.use(cors())
 
 
@@ -61,34 +63,68 @@ request(options, function (error, response) {
   status = x2js.xml2js(status)
   status=status['Envelope']['Body']['ZFM_LOGIN_CP_MDResponse']['E_MESSAGE']
   console.log(status)
-  // if(status == "S")
-  // {
-  //   client.messages 
-  //     .create({ 
-  //        body: 'Login Attempt Made!Login Successful!',  
-  //        messagingServiceSid: 'MG3b1bb34d27f2176205c43dbd554b58e0',      
-  //        to: '+919150064160' 
-  //      }) 
-  //     .then(message => console.log(message.sid)) 
-  //     .done();
-  // }
-  // else{
-  //   client.messages 
-  //     .create({ 
-  //        body: 'Login Attempt Made!Login Failure!Check Credentials',  
-  //        messagingServiceSid: 'MG3b1bb34d27f2176205c43dbd554b58e0',      
-  //        to: '+919150064160' 
-  //      }) 
-  //     .then(message => console.log(message.sid)) 
-  //     .done();
-
-  // }
   res.send(result1)
-});
+  if(status == "S")
+  {
+    client.messages 
+      .create({ 
+         body: 'CUSTOMER PORTAL-Login Attempt Made!Login Successful!',  
+         messagingServiceSid: 'MG3b1bb34d27f2176205c43dbd554b58e0',      
+         to: '+919150064160' 
+       }) 
+      .then(message => console.log(message.sid)) 
+      .done();
 
+      const msg = {
+        to: 'muraliramboo12@gmail.com', 
+        from: 'muralidharanportals@proton.me', 
+        subject: 'LOGIN ATTEMPT-Reg',
+        text: 'CUSTOMER PORTAL-Login Attempt Made!Login Successful!',
+        html: '<strong>CUSTOMER PORTAL-Login Attempt Made!Login Successful!</strong>',
+      }
+      sgMail
+        .send(msg)
+        .then(() => {
+          console.log('Email sent')
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+      
+  }
+  else{
+    client.messages 
+      .create({ 
+         body: 'CUSTOMER PORTAL-Login Attempt Made!Login Failure!Check Credentials',  
+         messagingServiceSid: 'MG3b1bb34d27f2176205c43dbd554b58e0',      
+         to: '+919150064160' 
+       }) 
+      .then(message => console.log(message.sid)) 
+      .done();
 
-     
+  const msg = {
+  to: 'muraliramboo12@gmail.com', 
+  from: 'muralidharanportals@proton.me', 
+  subject: 'LOGIN ATTEMPT-Reg',
+  text: 'CUSTOMER PORTAL-Login Attempt Made!Login Failure!Check Credentials',
+  html: '<strong>CUSTOMER PORTAL-Login Attempt Made!Login Failure!Check Credentials!</strong>',
+}
+sgMail
+  .send(msg)
+  .then(() => {
+    console.log('Email sent')
+  })
+  .catch((error) => {
+    console.error(error)
+  })
+
+  
+  }
+ 
+ });
+
 })
+
 
 app.get('/getauth',function(req,res)
 {
